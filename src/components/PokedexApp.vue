@@ -1,22 +1,28 @@
 <template>
   <main class="main">
-    <h2> Aplicação pokedex que consome a API <a href="https://pokeapi.co/" target="_blank" rel="noopener"> https://pokeapi.co/ </a></h2>
-    <label for="pokemon">
-        Digite o nome do pokemon!
-        <input id="pokemon" type="text">
-    </label>
-    <button @click="getData"> Procurar </button>
-    <PokeCard />
+    <form @submit.prevent="searchPkm">
+      <input id="" name="" type="text" v-model="search" placeholder="Digite o nome de um Pokemon">
+      <button @click="searchPkm"> Procurar </button>
+    </form>
+    <PokeCard v-if="dataFulfilled" :pkm="pokemonData" />
+    <h1 v-else>POKEMON NÃO ENCONTRADO</h1>
   </main>
 </template>
 
 <script>
-import PokeCard from './PokeCard.vue';
+import PokeCard from './PokeCard.vue'
 
 export default {
   data() {
     return {
-      pokemon: {}
+      search: '',
+      pokemonsData: [],
+      pokemonData: {
+        name: '',
+        url: '',
+      },
+      dataFulfilled: false
+
     }
   },
 
@@ -25,11 +31,26 @@ export default {
     PokeCard,
   },
 
+  created() {
+    fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
+      .then((response) => response.json())
+      .then((data) => this.pokemonsData = data)
+  }, 
+
   methods: {
-    getData() {
-      fetch('https://pokeapi.co/api/v2/pokemon/ditto')
-        .then(response => response.json())
-        .then(data => this.pokemon = data)
+    searchPkm() {
+      if(this.search.length > 0){
+        const text = this.search
+        const lowerText = text.toLowerCase();
+        const pokeFiltered = this.pokemonsData.results.find(pkm => pkm.name === lowerText)
+        this.pokemonData = pokeFiltered
+        this.search = ''
+        
+      }
+      if (this.pokemonData === undefined) { 
+        this.dataFulfilled = false
+        this.search = ''
+      } else this.dataFulfilled = true
     }
   },
 }
@@ -58,5 +79,8 @@ a {
 }
 a:visited{
   color: inherit;
+}
+h1 {
+  margin-top: 20%;
 }
 </style>
