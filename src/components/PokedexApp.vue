@@ -4,7 +4,7 @@
       <input id="" name="" type="text" v-model="search" placeholder="Digite o nome de um Pokemon">
       <button @click="searchPkm"> Procurar </button>
     </form>
-    <PokeCard v-if="dataFulfilled" :pkm="pokemonData" />
+    <PokeCard v-if="dataFulfilled" :pkm="pokemonData" :key="pokemonData.name" />
     <h1 v-else>POKEMON NÃO ENCONTRADO</h1>
   </main>
 </template>

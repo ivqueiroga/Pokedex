@@ -54,4 +54,7 @@ export default {
   height: 300px;
   width: 200px;
 }
+h3 {
+  text-transform: capitalize;
+}
 </style>
