@@ -31,13 +31,18 @@ export default {
   padding: 0;
 }
 
+body{
+  background: linear-gradient(145deg, rgba(13,13,13,1) 0%, rgba(255,0,0,1) 100%);
+  height: 120vh;
+  width: 100%;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  height: 100vh;
+  height: 100%;
   width: 100%;
-  background: linear-gradient(145deg, rgba(13,13,13,1) 0%, rgba(255,0,0,1) 100%);
   color: white;
   text-align: center;
   text-shadow: 2px 2px black;

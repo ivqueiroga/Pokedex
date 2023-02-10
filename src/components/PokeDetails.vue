@@ -1,13 +1,15 @@
 <template>
-  <article v-if="pokeDetails" class="details-container" :style="cssBgDefine"  >
-    <div class="detail-wrapper">
-      <h3 >{{pokeDetails.name}}</h3>
-      <ul class="list-wrapper">
-        <li class="list-item" v-for="(stat, i) in pokeDetails.stats" :key="i">
-          <p>{{stat.stat.name}}</p> <p>{{stat.base_stat}}</p>
-        </li>
-      </ul>
-    </div>
+  <article class="details-container">
+    <section v-if="pokeDetails" class="details-wrapper" :style="cssBgDefine">
+      <div class="detail-wrapper">
+        <h3 >{{pokeDetails.name}}</h3>
+        <ul class="list-wrapper">
+          <li class="list-item" v-for="(stat, i) in pokeDetails.stats" :key="i">
+            <p>{{stat.stat.name}}</p> <p>{{stat.base_stat}}</p>
+          </li>
+        </ul>
+      </div>
+    </section>
   </article>
 </template>
 
@@ -41,7 +43,12 @@ export default {
 </script>
 
 <style scoped>
+
 .details-container{
+  height: auto !important;
+  width: 100%;
+}
+.details-wrapper{
   background-color: rgba(255, 255, 255, 0.3);
   text-shadow: 1px 1px black;
   width: 100%;
@@ -54,6 +61,7 @@ export default {
   padding: 5%;
   height: 300px;
   width: 300px;
+  margin-bottom: 20%;
   
 }
 h3 {

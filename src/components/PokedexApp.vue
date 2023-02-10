@@ -123,6 +123,7 @@ h1 {
 }
 
 .poke-zone {
+  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
