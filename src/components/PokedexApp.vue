@@ -9,16 +9,14 @@
         <PokeCard v-if="dataFulfilled" :pkm="pokemonData" :key="pokemonData.name" @click="openDetail" />
         <div>
           <ul v-if="pokemonChain">
-            <li v-for="(pokm, i) in pokemonChain" :key="pokm.name">
-              texto - {{ i }}
-              <!-- {{ pokm.name }} -->
-              <PokeCard :pkm="pokm" :key="pokm.name" @click="openDetail"/>
+            <li v-for="(pokm) in pokemonChain" :key="pokm.name">
+              <PokeCard v-bind:pkm="pokm" @click="openDetail"/>
             </li>
           </ul>
         </div>
       </div>
       <div class="poke-detail">
-        <PokeDetails v-if="clicked" :pkm="clickedDetails" :key="clickedDetails.name" />
+        <PokeDetails v-if="isClicked" :pkm="pokemonData" :key="pokemonData.name" />
       </div>
     </div>
   </main>
@@ -31,15 +29,14 @@ import { pokemonsData, pokemonData, pokemonChainDataFetch } from '../helpers/dat
 
 const chainLister = async (list) => {
   let pkList = []
-      if (list){
-        list.forEach(async (pk) => {
-              const pkData = await pokemonData(pk.name)
-              pkList.push(pkData)
-            })
-          return pkList
-        } else {
-            return null
-          }
+    if (list){
+      await Promise.all(list.map(async (pk) => {
+        pkList.push(await pokemonData(pk.name))
+      }))
+      return pkList
+      } else {
+          return null
+        }
 } 
 
 export default {
@@ -49,8 +46,8 @@ export default {
       pokemonsData: [],
       pokemonData: Object,
       dataFulfilled: false,
-      pokemonChain: [],
-      clicked: false,
+      pokemonChain: null,
+      isClicked: false,
       clickedDetails: Object,
     }
   },
@@ -68,7 +65,7 @@ export default {
   methods: {
 
     openDetail() {
-      this.clicked = !this.clicked
+      this.isClicked = !this.isClicked
       this.clickedDetails = this.pokemonData
     },
 
