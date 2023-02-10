@@ -96,6 +96,7 @@ export default {
 <style scoped>
 .main{
   margin-top: 5%;
+  height: auto;
 }
 input {
   padding-left: 1%;
