@@ -8,7 +8,7 @@
       <div >
         <PokeCard v-if="dataFulfilled" :pkm="pokemonData" :key="pokemonData.name" @click="openDetail" />
         <div>
-          <ul v-if="hasChain">
+          <ul v-if="pokemonChain">
             <li v-for="(pokm) in pokemonChain" :key="pokm.name">
               {{ pokm.name }}
               <!-- <PokeCard :pkm="pokm" :key="pokm.name" @click="openDetail"/> -->
@@ -17,7 +17,7 @@
         </div>
       </div>
       <div>
-        <PokeDetails v-if="clicked" :pkm="pokemonData" :key="pokemonData.name" />
+        <PokeDetails v-if="clicked" :pkm="clickedDetails" :key="clickedDetails.name" />
       </div>
     </div>
   </main>
@@ -48,9 +48,9 @@ export default {
       pokemonsData: [],
       pokemonData: Object,
       dataFulfilled: false,
-      hasChain: false,
       pokemonChain: null,
-      clicked: false
+      clicked: false,
+      clickedDetails: Object,
     }
   },
 
@@ -68,6 +68,7 @@ export default {
 
     openDetail() {
       this.clicked = !this.clicked
+      this.clickedDetails = this.pokemonData
     },
 
     async searchPkm() {

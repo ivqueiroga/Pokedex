@@ -1,12 +1,16 @@
 <template>
   <header class="header">
     <div class="header-owner">
-      <a href="http://ivqueiroga.com" target="_blank" rel="noopener"><img alt="Ivan logo" width="50" height="50" src="./assets/Logo.svg"></a>
-      <h1>Pokedex por Ivan Queiroga</h1>
+      <img alt="Pokebola logo" width="50" height="50" src="./assets/Logo.svg">
+      <h1>Pokedex</h1>
     </div>
     <h2 class="header-about"> Aplicação pokedex que consome a API <a href="https://pokeapi.co/" target="_blank" rel="noopener"> https://pokeapi.co/ </a></h2>
   </header> 
   <PokedexApp />
+  <footer class="footer">
+    <a href="http://ivqueiroga.com" target="_blank" rel="noopener"><img alt="Ivan logo" width="30" height="30" src="./assets/LogoIvan.svg"></a>
+    <h3>Ivan Queiroga</h3>
+  </footer>
 </template>
 
 <script>
@@ -65,5 +69,23 @@ a {
 }
 a:visited{
   color: inherit;
+}
+
+.footer {
+  background: linear-gradient(180deg, rgba(13,13,13,1) 0%, rgba(85,85,85,1) 100%);
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+  justify-content: center;
+  text-shadow: 2px 2px black;
+  align-items: center;
+  height: 80px;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+}
+
+.footer > h3 {
+  margin-left: 5%;
 }
 </style>
