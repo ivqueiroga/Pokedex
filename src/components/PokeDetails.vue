@@ -47,6 +47,7 @@ export default {
 .details-container{
   height: auto !important;
   width: 100%;
+  margin-bottom: calc(80px + 5%);
 }
 .details-wrapper{
   background-color: rgba(255, 255, 255, 0.3);
@@ -61,7 +62,6 @@ export default {
   padding: 5%;
   height: 300px;
   width: 300px;
-  margin-bottom: 20%;
   
 }
 h3 {

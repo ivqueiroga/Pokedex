@@ -61,7 +61,6 @@ body{
   display: flex;
   justify-content: center;
   flex-direction: row;
-  margin-bottom: 5%;
 }
 
 .header-owner > h1{
