@@ -126,4 +126,12 @@ h1 {
   flex-direction: row;
   justify-content: space-around;
 }
+
+@media screen and (max-width: 1100px) {
+  .poke-zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  }
+}
 </style>
