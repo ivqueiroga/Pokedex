@@ -102,8 +102,9 @@ export default {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   justify-items: center;
+  height: auto;
 }
 .card-container{
   background-color: rgba(255, 255, 255, 0.3);

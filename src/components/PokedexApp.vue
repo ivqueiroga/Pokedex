@@ -5,18 +5,19 @@
       <button @click="searchPkm"> Procurar </button>
     </form>
     <div class="poke-zone">
-      <div >
+      <div class="poke-search">
         <PokeCard v-if="dataFulfilled" :pkm="pokemonData" :key="pokemonData.name" @click="openDetail" />
         <div>
           <ul v-if="pokemonChain">
-            <li v-for="(pokm) in pokemonChain" :key="pokm.name">
-              {{ pokm.name }}
-              <!-- <PokeCard :pkm="pokm" :key="pokm.name" @click="openDetail"/> -->
+            <li v-for="(pokm, i) in pokemonChain" :key="pokm.name">
+              texto - {{ i }}
+              <!-- {{ pokm.name }} -->
+              <PokeCard :pkm="pokm" :key="pokm.name" @click="openDetail"/>
             </li>
           </ul>
         </div>
       </div>
-      <div>
+      <div class="poke-detail">
         <PokeDetails v-if="clicked" :pkm="clickedDetails" :key="clickedDetails.name" />
       </div>
     </div>
@@ -48,7 +49,7 @@ export default {
       pokemonsData: [],
       pokemonData: Object,
       dataFulfilled: false,
-      pokemonChain: null,
+      pokemonChain: [],
       clicked: false,
       clickedDetails: Object,
     }
@@ -83,6 +84,7 @@ export default {
           this.pokemonData = await pokemonData(pokeFiltered.name)
           const chain = await pokemonChainDataFetch(this.pokemonData.name)
           chain.length === 0 ? this.pokemonChain = chainLister()  : this.pokemonChain = chainLister(chain)
+          console.log(this.pokemonChain)
           this.search = ''
           this.dataFulfilled = true
         }    
@@ -127,6 +129,18 @@ h1 {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
+}
+
+.poke-search {
+  display: flex;
+  width: 50%;
+  justify-content: center;
+}
+
+.poke-detail {
+  display: flex;
+  width: 50%;
+  justify-content: center;
 }
 
 @media screen and (max-width: 1100px) {

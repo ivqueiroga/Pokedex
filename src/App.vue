@@ -51,7 +51,7 @@ body{
 .header {
   padding-left: 5%;
   padding-right: 5%;
-  padding-top: 2%;
+  padding-top: 5%;
   display: flex;
   flex-direction: column;
   text-shadow: 2px 2px black;
@@ -60,12 +60,17 @@ body{
 .header-owner {
   display: flex;
   justify-content: center;
+  align-items: center;
   flex-direction: row;
 }
 
 .header-owner > h1{
   padding-left: 5%;
   align-items: center;
+}
+
+.header > h2{
+  margin-top: 5%;
 }
 
 a {

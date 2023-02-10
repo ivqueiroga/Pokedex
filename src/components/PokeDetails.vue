@@ -46,14 +46,13 @@ export default {
 
 .details-container{
   height: auto !important;
-  width: 100%;
+  display: flex;
+  justify-content: center;
   margin-bottom: calc(80px + 5%);
 }
 .details-wrapper{
   background-color: rgba(255, 255, 255, 0.3);
   text-shadow: 1px 1px black;
-  width: 100%;
-  height: 100%;
   border: 3px groove black;
   border-radius: 12px;
   display: flex;

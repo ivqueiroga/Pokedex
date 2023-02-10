@@ -3,7 +3,7 @@ export const pokemonData = async (name) =>  {
   const data = await fetch(`${url}${name}`)
       .then((response) => response.json())
       .then((data) =>  data)
-  return data  
+  return data
 }
 
 export const pokemonDetais =  (data) => {
