@@ -1,5 +1,6 @@
-export const pokemonData = async (url) =>  {
-  const data = await fetch(url)
+export const pokemonData = async (name) =>  {
+  const url = 'https://pokeapi.co/api/v2/pokemon/'
+  const data = await fetch(`${url}${name}`)
       .then((response) => response.json())
       .then((data) =>  data)
   return data  

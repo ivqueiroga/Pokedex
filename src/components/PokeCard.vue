@@ -106,6 +106,8 @@ export default {
   justify-items: center;
 }
 .card-container{
+  background-color: rgba(255, 255, 255, 0.3);
+  text-shadow: 1px 1px black;
   border: 1px groove white;
   border-radius: 12px;
   display: flex;

@@ -4,19 +4,21 @@
       <input id="" name="" type="text" v-model="search" placeholder="Digite o nome de um Pokemon">
       <button @click="searchPkm"> Procurar </button>
     </form>
-    <div>
-      <PokeCard v-if="dataFulfilled" :pkm="pokemonData" :key="pokemonData.name" />
-      <h1 v-else>PESQUISE POR UM POKEMON VÁLIDO</h1>
-      <ul v-if="hasChain">
-        <li  v-for="(pkm, index) in pokemonChain" :key="index">
-          {{ pkm }}
-          <!-- <PokeCard :pkm="pokemonData" :key="pokemonData.name" /> -->
-        </li>
-      </ul>
-      
-    </div>
-    <div>
-      <PokeDetails />
+    <div class="poke-zone">
+      <div >
+        <PokeCard v-if="dataFulfilled" :pkm="pokemonData" :key="pokemonData.name" @click="openDetail" />
+        <div>
+          <ul v-if="hasChain">
+            <li v-for="(pokm) in pokemonChain" :key="pokm.name">
+              {{ pokm.name }}
+              <!-- <PokeCard :pkm="pokm" :key="pokm.name" @click="openDetail"/> -->
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <PokeDetails v-if="clicked" :pkm="pokemonData" :key="pokemonData.name" />
+      </div>
     </div>
   </main>
 </template>
@@ -26,18 +28,29 @@ import PokeCard from './PokeCard.vue'
 import PokeDetails from './PokeDetails.vue'
 import { pokemonsData, pokemonData, pokemonChainDataFetch } from '../helpers/dataProcess'
 
+const chainLister = async (list) => {
+  let pkList = []
+      if (list){
+        list.forEach(async (pk) => {
+              const pkData = await pokemonData(pk.name)
+              pkList.push(pkData)
+            })
+          return pkList
+        } else {
+            return null
+          }
+} 
+
 export default {
   data() {
     return {
       search: '',
       pokemonsData: [],
-      pokemonData: {
-        name: '',
-        url: '',
-      },
+      pokemonData: Object,
       dataFulfilled: false,
       hasChain: false,
-      pokemonChain: []
+      pokemonChain: null,
+      clicked: false
     }
   },
 
@@ -52,8 +65,9 @@ export default {
   }, 
 
   methods: {
-    chainLister() {
 
+    openDetail() {
+      this.clicked = !this.clicked
     },
 
     async searchPkm() {
@@ -65,10 +79,9 @@ export default {
           this.dataFulfilled = false
           this.search = ''
       } else {
-          this.pokemonData = await pokemonData(pokeFiltered.url)
+          this.pokemonData = await pokemonData(pokeFiltered.name)
           const chain = await pokemonChainDataFetch(this.pokemonData.name)
-          this.pokemonChain = chain
-          chain.length === 0 ? this.hasChain = false : this.hasChain = true
+          chain.length === 0 ? this.pokemonChain = chainLister()  : this.pokemonChain = chainLister(chain)
           this.search = ''
           this.dataFulfilled = true
         }    
@@ -105,5 +118,11 @@ a:visited{
 }
 h1 {
   margin-top: 20%;
+}
+
+.poke-zone {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
 }
 </style>
