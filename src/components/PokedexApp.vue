@@ -61,17 +61,18 @@ export default {
   margin-top: 5%;
 }
 input {
+  padding-left: 1%;
   margin-top: 2%;
   width: 300px;
   height: 30px;
-  border-radius: 5px;
+  border-radius: 12px;
 }
 button {
   margin-top: 2%;
   margin-bottom: 2%;
   height: 30px;
   width: 100px;
-  border-radius: 5px;
+  border-radius: 12px;
 }
 a {
   text-decoration: none;
