@@ -5,6 +5,9 @@
 <script>
 export default {
   name: 'PokeDetails',
+  props: {
+    pkm: Object,
+  },
 }
 </script>
 

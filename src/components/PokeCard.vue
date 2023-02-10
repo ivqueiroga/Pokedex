@@ -2,7 +2,7 @@
   <article class="cards-container" v-if="pokeInfo">
     <section class="card-container" :style="colorByType" >
       <div class="card-wrapper">
-        <img :src="pokeInfo.imgUrl" :width="150" />
+        <img :src="pokeInfo.sprites.front_default" :width="150" />
         <h3>{{pokeInfo.name}}</h3>
       </div>
     </section>
@@ -10,21 +10,17 @@
 </template>
 
 <script>
-import { pokemonChainDataFetch, pokemonData } from '../helpers/dataProcess'
 
 export default {
   
   data() {
     return {
       pokeInfo: null,
-      pokeStats: null,
     }
   },
 
   async created () {
-    let fetchURL = this.pkm.url
-    this.pokeInfo = await pokemonData(fetchURL)
-    this.pokeStats = await pokemonChainDataFetch(this.pkm.name)
+    this.pokeInfo = this.pkm
   },
 
   name: 'PokeCard',
@@ -35,7 +31,7 @@ export default {
   computed : {
     colorByType() {
       let color = 'white'
-      switch (this.pokeInfo.type) {
+      switch (this.pokeInfo.types[0].type.name) {
         case 'grass':
           color = '#204000'
           break;
@@ -131,34 +127,4 @@ section {
   width: 50%;
   justify-content: space-between;
 }
-
-/* @keyframes flickering {
-  0%{
-    box-shadow: 0px 0px 10px 5px v-bind(color);
-  }
-
-  10%{
-    box-shadow: 0px 0px 20px 5px v-bind(color);
-  }
-
-  20%{
-    box-shadow: 0px 0px 10px 5px v-bind(color);
-  }
-
-  50%{
-    box-shadow: 0px 0px 2px 5px v-bind(color);
-  }
-
-  80%{
-    box-shadow: 0px 0px 2px 5px v-bind(color);
-  }
-
-  90%{
-    box-shadow: 0px 0px 18px 5px v-bind(color);
-  }
-
-  100%{
-    box-shadow: 0px 0px 20px 5px v-bind(color);
-  }
-} */
 </style>
