@@ -5,12 +5,13 @@
       <button @click="searchPkm"> Procurar </button>
     </form>
     <PokeCard v-if="dataFulfilled" :pkm="pokemonData" :key="pokemonData.name" />
-    <h1 v-else>POKEMON NÃO ENCONTRADO</h1>
+    <h1 v-else>PESQUISE POR UM POKEMON VÁLIDO</h1>
   </main>
 </template>
 
 <script>
 import PokeCard from './PokeCard.vue'
+import { pokemonsData } from '../helpers/dataProcess'
 
 export default {
   data() {
@@ -31,15 +32,13 @@ export default {
     PokeCard,
   },
 
-  created() {
-    fetch('https://pokeapi.co/api/v2/pokemon?limit=100000&offset=0')
-      .then((response) => response.json())
-      .then((data) => this.pokemonsData = data)
+  async created() {
+    this.pokemonsData = await pokemonsData()
   }, 
 
   methods: {
     searchPkm() {
-      if(this.search.length > 0){
+      if(this.search.length > 0 ){
         const text = this.search
         const lowerText = text.toLowerCase();
         const pokeFiltered = this.pokemonsData.results.find(pkm => pkm.name === lowerText)

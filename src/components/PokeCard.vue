@@ -1,28 +1,30 @@
 <template>
-  <section class="cards-container" v-if="pokeInfo">
-    <div class="card-wrapper"> 
-      <img :src="pokeInfo.sprites.front_default" :width="150" />
-      <h3>{{pokeInfo.name}}</h3>
-    </div>
-  </section>
+  <article class="cards-container" v-if="pokeInfo">
+    <section class="card-container">
+      <div class="card-wrapper">
+        <img :src="pokeInfo.imgUrl" :width="150" />
+        <h3>{{pokeInfo.name}}</h3>
+      </div>
+    </section>
+  </article>
 </template>
 
 <script>
+import { pokemonChainDataFetch, pokemonData } from '../helpers/dataProcess'
 
 export default {
+  
   data() {
     return {
       pokeInfo: null,
+      pokeStats: null,
     }
   },
 
-  created () {
-    this.pokeInfo = null
-    let fetchURL = this.pkm
-    let { url } = fetchURL
-    fetch(url)
-      .then((response) => response.json())
-      .then((data) => this.pokeInfo = data)
+  async created () {
+    let fetchURL = this.pkm.url
+    this.pokeInfo = await pokemonData(fetchURL)
+    this.pokeStats = await pokemonChainDataFetch(this.pkm.name)
   },
 
   name: 'PokeCard',
@@ -37,12 +39,12 @@ export default {
 .cards-container{
   padding: 5%;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-around;
   align-items: center;
   justify-items: center;
 }
-.card-wrapper{
+.card-container{
   border: 3px groove white;
   border-radius: 5px;
   box-shadow: 0px 0px 20px 5px black;
@@ -57,4 +59,12 @@ export default {
 h3 {
   text-transform: capitalize;
 }
+
+section {
+  display: flex;
+  flex-direction: row;
+  width: 50%;
+  justify-content: space-between;
+}
+
 </style>

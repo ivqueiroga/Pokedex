@@ -45,7 +45,6 @@ export default {
   padding-top: 2%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   text-shadow: 2px 2px black;
 }
 
