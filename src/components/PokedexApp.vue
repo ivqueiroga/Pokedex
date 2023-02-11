@@ -82,7 +82,6 @@ export default {
           this.pokemonData = await pokemonData(pokeFiltered.name)
           const chain = await pokemonChainDataFetch(this.pokemonData.name)
           chain.length === 0 ? this.pokemonChain.splice(0, this.pokemonChain.length)  : this.pokemonChain.push(await chainLister(chain))
-          console.log(this.pokemonChain)
           this.search = ''
           this.dataFulfilled = true
         }    
