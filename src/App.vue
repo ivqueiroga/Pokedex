@@ -37,6 +37,10 @@ body{
   width: 100%;
 }
 
+li {
+  list-style-type: none;
+}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

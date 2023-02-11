@@ -73,9 +73,6 @@ section {
   width: 100%;
   justify-content: space-between;
 }
-li {
-  list-style-type: none;
-}
 
 .list-item {
   display: flex;

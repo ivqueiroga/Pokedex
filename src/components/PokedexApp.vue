@@ -8,8 +8,8 @@
       <div class="poke-search">
         <PokeCard v-if="dataFulfilled" :pkm="pokemonData" :key="pokemonData.name" @click="openDetail" />
         <div>
-          <ul v-if="pokemonChain">
-            <li v-for="(pokm) in pokemonChain" :key="pokm.name">
+          <ul v-if="pokemonChain.length > 0">
+            <li v-for="(pokm) in pokemonChain[0]" :key="pokm.name">
               <PokeCard v-bind:pkm="pokm" @click="openDetail"/>
             </li>
           </ul>
@@ -46,7 +46,7 @@ export default {
       pokemonsData: [],
       pokemonData: Object,
       dataFulfilled: false,
-      pokemonChain: null,
+      pokemonChain: [],
       isClicked: false,
       clickedDetails: Object,
     }
@@ -80,7 +80,8 @@ export default {
       } else {
           this.pokemonData = await pokemonData(pokeFiltered.name)
           const chain = await pokemonChainDataFetch(this.pokemonData.name)
-          chain.length === 0 ? this.pokemonChain = chainLister()  : this.pokemonChain = chainLister(chain)
+          chain.length === 0 ? this.pokemonChain = null  : this.pokemonChain.push(await chainLister(chain))
+          console.log(this.pokemonChain)
           this.search = ''
           this.dataFulfilled = true
         }    
