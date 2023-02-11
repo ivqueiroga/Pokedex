@@ -157,5 +157,10 @@ h1 {
   flex-direction: column;
   align-items: center;
   }
+
+  .evo-chain{
+    flex-direction: column;
+    margin-bottom: 400px;
+  }
 }
 </style>
