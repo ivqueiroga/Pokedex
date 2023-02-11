@@ -122,10 +122,11 @@ h1 {
 }
 
 .poke-zone {
-  height: 100%;
+  height: auto;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  justify-content: center;
+  padding-bottom: 30%;
 }
 
 .poke-search {
@@ -136,7 +137,6 @@ h1 {
 }
 
 .evo-chain{
-  height: auto;
   padding-left: 5%;
   padding-right: 5%;
   justify-content: center;
@@ -157,10 +157,14 @@ h1 {
   flex-direction: column;
   align-items: center;
   }
+  .poke-search {
+    width: 100%;
+    height: auto;
+}
 
   .evo-chain{
     flex-direction: column;
-    margin-bottom: 400px;
+    padding-bottom: 50px;
   }
 }
 </style>

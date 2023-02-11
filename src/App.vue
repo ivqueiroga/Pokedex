@@ -31,10 +31,18 @@ export default {
   padding: 0;
 }
 
+html {
+    height: 100%;
+}
+
 body{
   background: linear-gradient(145deg, rgba(13,13,13,1) 0%, rgba(255,0,0,1) 100%);
-  height: 120vh;
+  height: 100vh;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   width: 100%;
+  overflow: auto;
 }
 
 li {

@@ -48,7 +48,7 @@ export default {
   height: auto !important;
   display: flex;
   justify-content: center;
-  margin-bottom: calc(80px + 5%);
+  /* margin-bottom: calc(80px + 5%); */
 }
 .details-wrapper{
   background-color: rgba(255, 255, 255, 0.3);
@@ -77,5 +77,11 @@ section {
 .list-item {
   display: flex;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 1100px) {
+  .details-container{
+    margin-top: 50%;
+  }
 }
 </style>
