@@ -8,7 +8,7 @@
       <div class="poke-search">
         <PokeCard v-if="dataFulfilled" :pkm="pokemonData" :key="pokemonData.name" @click="openDetail" />
         <div>
-          <ul v-if="pokemonChain.length > 0">
+          <ul class="evo-chain" v-if="pokemonChain.length > 0">
             <li v-for="(pokm) in pokemonChain[0]" :key="pokm.name">
               <PokeCard v-bind:pkm="pokm" @click="openDetail"/>
             </li>
@@ -74,13 +74,14 @@ export default {
         const text = this.search
         const lowerText = text.toLowerCase();
         const pokeFiltered = this.pokemonsData.results.find(pkm => pkm.name === lowerText)
+        this.pokemonChain.splice(0, this.pokemonChain.length)
         if (pokeFiltered === undefined) { 
           this.dataFulfilled = false
           this.search = ''
       } else {
           this.pokemonData = await pokemonData(pokeFiltered.name)
           const chain = await pokemonChainDataFetch(this.pokemonData.name)
-          chain.length === 0 ? this.pokemonChain = null  : this.pokemonChain.push(await chainLister(chain))
+          chain.length === 0 ? this.pokemonChain.splice(0, this.pokemonChain.length)  : this.pokemonChain.push(await chainLister(chain))
           console.log(this.pokemonChain)
           this.search = ''
           this.dataFulfilled = true
@@ -130,8 +131,19 @@ h1 {
 
 .poke-search {
   display: flex;
+  flex-direction: column;
   width: 50%;
+  flex-wrap: wrap;
+}
+
+.evo-chain{
+  height: auto;
+  padding-left: 5%;
+  padding-right: 5%;
   justify-content: center;
+  display: flex;
+  flex: 1 0 50%;
+  zoom: 0.5;
 }
 
 .poke-detail {
